@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { EmpresasModule } from './empresas/empresas.module';
-import { SucursalesModule } from './sucursales/sucursales.module';
 import { DireccionesModule } from './direcciones/direcciones.module';
 import { DepartamentosModule } from './departamentos/departamentos.module';
 import { MunicipiosModule } from './municipios/municipios.module';
@@ -58,7 +57,6 @@ import { join } from 'path';
     }),
     UsuariosModule,
     EmpresasModule,
-    SucursalesModule,
     DireccionesModule,
     DepartamentosModule,
     MunicipiosModule,
