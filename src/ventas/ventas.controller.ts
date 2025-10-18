@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards, Req } from '@nestjs/common';
 import { VentasService } from './ventas.service';
 import { CreateVentaDto } from './dto/create-venta.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -13,8 +13,8 @@ export class VentasController {
 
   @Post()
   @RequerirPermisos(Permisos.CrearVentas)
-  create(@Body() createVentaDto: CreateVentaDto) {
-    return this.ventasService.create(createVentaDto);
+  create(@Body() createVentaDto: CreateVentaDto, @Req() req: any) {
+    return this.ventasService.create(createVentaDto, req.user.userId);
   }
 
   @Get()

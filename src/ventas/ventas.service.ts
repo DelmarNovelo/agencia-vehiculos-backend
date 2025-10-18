@@ -2,11 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { CreateVentaDto } from './dto/create-venta.dto';
-import { UpdateVentaDto } from './dto/update-venta.dto';
 import { Venta } from './entities/venta.entity';
 import { ItemVenta } from 'src/items-venta/entities/item-venta.entity';
 import { Cliente } from 'src/clientes/entities/cliente.entity';
-import { TipoPago } from 'src/tipos-pago/entities/tipo-pago.entity';
 import { UnidadVehicular } from 'src/unidades-vehiculares/entities/unidad-vehicular.entity';
 import { MetodoPago } from 'src/metodos-pago/entities/metodo-pago.entity';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
@@ -25,7 +23,7 @@ export class VentasService {
     private readonly usuarioRepository: Repository<Usuario>,
   ) { }
 
-  async create(createVentaDto: CreateVentaDto) {
+  async create(createVentaDto: CreateVentaDto, usuarioId: number) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -46,7 +44,7 @@ export class VentasService {
       }
 
       const usuario = await queryRunner.manager.findOne(Usuario, {
-        where: { id: 1 }
+        where: { id: usuarioId }
       });
 
       const unidadesVehiculares: any[] = [];

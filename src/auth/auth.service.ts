@@ -41,12 +41,20 @@ export class AuthService {
 
     const payload: any = {
       userId: usuario.id,
-      email: usuario.email,permisos: [...new Set(permisosUnicos)]
+      email: usuario.email, permisos: [...new Set(permisosUnicos)]
     };
 
     const accessToken = this.getToken(payload);
 
-    return { token: accessToken };
+    const nombre = usuario.persona.nombre.split(' ')[0];
+    const apellido = usuario.persona.apellido.split(' ')[0];
+
+    return {
+      token: accessToken,
+      usuario: {
+        nombreCompleto: `${nombre} ${apellido}`
+      }
+    };
   }
 
   getToken(payload: any) {
